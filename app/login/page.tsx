@@ -40,7 +40,7 @@ export default function Login() {
           <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mb-4">
             <Paintbrush className="text-blue-600 dark:text-blue-400" size={32} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Pintura & Cia</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Sua Empresa Aqui</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Acesso exclusivo para sócios</p>
         </div>
 
