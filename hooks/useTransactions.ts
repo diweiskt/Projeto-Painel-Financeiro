@@ -51,8 +51,13 @@ export function useTransactions() {
   }, [periodoFiltro, socioLogado]);
 
   const carregarDados = async () => {
+    const [ano, mes] = periodoFiltro.split('-');
     const primeiroDia = `${periodoFiltro}-01`;
-    const ultimoDia = `${periodoFiltro}-31`; 
+    
+    // CORREÇÃO: Calcula dinamicamente o último dia do mês para a query na tela
+    const ultimoDiaObjeto = new Date(Number(ano), Number(mes), 0);
+    const diaFinal = String(ultimoDiaObjeto.getDate()).padStart(2, '0');
+    const ultimoDia = `${periodoFiltro}-${diaFinal}`; 
 
     const { data, error } = await supabase
       .from('transactions')
@@ -170,9 +175,15 @@ export function useTransactions() {
     let query = supabase.from('transactions').select('*').order('transaction_date', { ascending: false });
 
     if (exportType === 'MONTH') {
-      const primeiroDia = `${exportPeriodo}-01`;
-      const ultimoDia = `${exportPeriodo}-31`;
-      query = query.gte('transaction_date', primeiroDia).lte('transaction_date', ultimoDia);
+      const [anoExp, mesExp] = exportPeriodo.split('-');
+      const primeiroDiaExp = `${exportPeriodo}-01`;
+      
+      // CORREÇÃO: Calcula dinamicamente o último dia do mês para a query do EXCEL
+      const ultimoDiaObjetoExp = new Date(Number(anoExp), Number(mesExp), 0);
+      const diaFinalExp = String(ultimoDiaObjetoExp.getDate()).padStart(2, '0');
+      const ultimoDiaExp = `${exportPeriodo}-${diaFinalExp}`;
+      
+      query = query.gte('transaction_date', primeiroDiaExp).lte('transaction_date', ultimoDiaExp);
     }
 
     const { data, error } = await query;
