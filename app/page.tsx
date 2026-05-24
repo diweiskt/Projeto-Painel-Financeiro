@@ -62,68 +62,74 @@ export default function Dashboard() {
       
       {/* --- Header & Controls --- */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 max-w-6xl mx-auto">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Sua Empresa Aqui</h1>
-          <div className="flex items-center gap-4 mt-0.5">
-            <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
-              <User size={14} /> Bem-vindo, 
-              <span className="font-bold text-blue-600 dark:text-blue-400">
-                {socioLogado?.nome || socioLogado?.email}
-              </span>
-            </p>
-            <button 
-              onClick={fazerLogout} 
-              className="text-xs flex items-center gap-1 text-gray-400 hover:text-red-500 transition"
-            >
-              <LogOut size={12} /> Sair
-            </button>
+        <div className="w-full md:w-auto flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Sua Empresa Aqui</h1>
+            <div className="flex items-center gap-4 mt-0.5">
+              <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <User size={14} /> Bem-vindo, 
+                <span className="font-bold text-blue-600 dark:text-blue-400 truncate max-w-[120px] sm:max-w-none">
+                  {socioLogado?.nome || socioLogado?.email}
+                </span>
+              </p>
+              <button 
+                onClick={fazerLogout} 
+                className="text-xs flex items-center gap-1 text-gray-400 hover:text-red-500 transition"
+              >
+                <LogOut size={12} /> Sair
+              </button>
+            </div>
           </div>
         </div>
         
-        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-          <button 
-            onClick={() => setIsExportModalOpen(true)} 
-            className="flex items-center gap-2 bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-2 rounded-lg font-medium transition dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 text-sm border border-gray-300 dark:border-gray-600"
-          >
-            <Download size={16} /> <span className="hidden md:inline">Exportar</span>
-          </button>
-          
-          <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-            <Filter size={16} className="text-gray-400" />
-            <input 
-              type="month" 
-              value={periodoFiltro} 
-              onChange={(e) => setPeriodoFiltro(e.target.value)} 
-              className="bg-transparent dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-medium outline-none cursor-pointer"
-            />
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full md:w-auto">
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button 
+              onClick={() => setIsExportModalOpen(true)} 
+              className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-2 rounded-lg font-medium transition dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 text-sm border border-gray-300 dark:border-gray-600"
+            >
+              <Download size={16} /> <span className="hidden sm:inline">Exportar</span>
+            </button>
+            
+            <div className="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-white dark:bg-gray-800 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+              <Filter size={16} className="text-gray-400" />
+              <input 
+                type="month" 
+                value={periodoFiltro} 
+                onChange={(e) => setPeriodoFiltro(e.target.value)} 
+                className="bg-transparent dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-medium outline-none cursor-pointer w-full"
+              />
+            </div>
           </div>
 
-          <button 
-            onClick={() => abrirModalNovo('EXPENSE')} 
-            className="flex items-center gap-2 bg-red-100 text-red-700 hover:bg-red-200 px-4 py-2 rounded-lg font-medium transition dark:bg-red-900/30 dark:text-red-400 text-sm"
-          >
-            <MinusCircle size={18} /> <span>Nova Despesa</span>
-          </button>
-          
-          <button 
-            onClick={() => abrirModalNovo('INCOME')} 
-            className="flex items-center gap-2 bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition text-sm"
-          >
-            <PlusCircle size={18} /> <span>Nova Receita</span>
-          </button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button 
+              onClick={() => abrirModalNovo('EXPENSE')} 
+              className="flex-1 justify-center flex items-center gap-2 bg-red-100 text-red-700 hover:bg-red-200 px-4 py-2 rounded-lg font-medium transition dark:bg-red-900/30 dark:text-red-400 text-sm whitespace-nowrap"
+            >
+              <MinusCircle size={18} /> <span>Despesa</span>
+            </button>
+            
+            <button 
+              onClick={() => abrirModalNovo('INCOME')} 
+              className="flex-1 justify-center flex items-center gap-2 bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition text-sm whitespace-nowrap"
+            >
+              <PlusCircle size={18} /> <span>Receita</span>
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto space-y-8">
         
         {/* --- Summary Cards --- */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Saldo no Período</h2>
               <Wallet className="text-blue-500" size={20} />
             </div>
-            <p className={`text-3xl font-bold ${saldo >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600'}`}>
+            <p className={`text-3xl font-bold truncate ${saldo >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600'}`}>
               {formatarMoeda(saldo)}
             </p>
           </div>
@@ -133,17 +139,17 @@ export default function Dashboard() {
               <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Entradas</h2>
               <DollarSign className="text-green-500" size={20} />
             </div>
-            <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+            <p className="text-2xl font-bold text-green-600 dark:text-green-400 truncate">
               {formatarMoeda(entradas)}
             </p>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 sm:col-span-2 md:col-span-1">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Saídas</h2>
               <DollarSign className="text-red-500" size={20} />
             </div>
-            <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+            <p className="text-2xl font-bold text-red-600 dark:text-red-400 truncate">
               {formatarMoeda(saidas)}
             </p>
           </div>
@@ -151,7 +157,7 @@ export default function Dashboard() {
 
         {/* --- Charts --- */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col overflow-hidden">
             <h3 className="font-semibold mb-4 text-lg">Distribuição por Categoria</h3>
             <div className="flex-1 w-full min-h-[250px]">
               {dadosRosca.length > 0 ? (
@@ -163,18 +169,18 @@ export default function Dashboard() {
                       ))}
                     </Pie>
                     <Tooltip formatter={(value: any) => formatarMoeda(Number(value))} />
-                    <Legend />
+                    <Legend wrapperStyle={{ fontSize: '12px', marginTop: '10px' }} />
                   </PieChart>
                 </ResponsiveContainer>
               ) : ( 
-                <div className="flex h-full items-center justify-center text-sm text-gray-400">
+                <div className="flex h-full items-center justify-center text-sm text-gray-400 text-center">
                   Nenhuma despesa neste período.
                 </div> 
               )}
             </div>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col overflow-hidden">
             <h3 className="font-semibold mb-4 text-lg">Entradas vs Saídas</h3>
             <div className="flex-1 w-full min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -182,8 +188,8 @@ export default function Dashboard() {
                   <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
                   <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `R$ ${value}`} width={80} />
                   <Tooltip cursor={{fill: 'transparent'}} formatter={(value: any) => formatarMoeda(Number(value))} />
-                  <Bar dataKey="Entradas" fill="#10b981" radius={[4, 4, 0, 0]} barSize={50} />
-                  <Bar dataKey="Saídas" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={50} />
+                  <Bar dataKey="Entradas" fill="#10b981" radius={[4, 4, 0, 0]} barSize={40} />
+                  <Bar dataKey="Saídas" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={40} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -191,52 +197,54 @@ export default function Dashboard() {
         </section>
 
         {/* --- Transaction History Table --- */}
-        <section className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+        <section className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
           <h3 className="font-semibold text-lg flex items-center gap-2 mb-6">
             <Calendar size={20} className="text-amber-500"/> Histórico de Transações
           </h3>
           
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+          {/* Container com scroll horizontal em telas pequenas */}
+          <div className="overflow-x-auto pb-4">
+            {/* Tabela com largura mínima garantida (min-w-[800px]) para as colunas não esmagarem */}
+            <table className="w-full min-w-[800px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400">
-                  <th className="pb-3 font-medium">Data</th>
-                  <th className="pb-3 font-medium">Categoria</th>
+                  <th className="pb-3 font-medium whitespace-nowrap">Data</th>
+                  <th className="pb-3 font-medium whitespace-nowrap">Categoria</th>
                   <th className="pb-3 font-medium">Descrição</th>
-                  <th className="pb-3 font-medium">Forma</th>
-                  <th className="pb-3 font-medium">Registrado por</th>
-                  <th className="pb-3 font-medium">Tipo</th>
-                  <th className="pb-3 font-medium">Valor</th>
-                  <th className="pb-3 font-medium text-right">Ações</th>
+                  <th className="pb-3 font-medium whitespace-nowrap">Forma</th>
+                  <th className="pb-3 font-medium whitespace-nowrap">Registrado por</th>
+                  <th className="pb-3 font-medium whitespace-nowrap">Tipo</th>
+                  <th className="pb-3 font-medium whitespace-nowrap text-right">Valor</th>
+                  <th className="pb-3 font-medium whitespace-nowrap text-center">Ações</th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 {transacoes.length === 0 ? ( 
                   <tr>
-                    <td colSpan={8} className="py-4 text-center text-gray-400">Nenhuma transação neste período.</td>
+                    <td colSpan={8} className="py-8 text-center text-gray-400">Nenhuma transação neste período.</td>
                   </tr> 
                 ) : (
                   transacoes.map((item) => (
                     <tr key={item.id} className="border-b border-gray-100 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition group">
-                      <td className="py-4 text-gray-900 dark:text-white font-medium">
+                      <td className="py-4 text-gray-900 dark:text-white font-medium whitespace-nowrap">
                         {formatarDataBr(item.transaction_date)}
                       </td>
-                      <td className="py-4 font-semibold text-gray-700 dark:text-gray-300">
+                      <td className="py-4 font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
                         <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-xs">{item.category || 'Outros'}</span>
                       </td>
-                      <td className="py-4 font-medium">{item.description}</td>
-                      <td className="py-4 text-gray-600 dark:text-gray-400">{item.payment_method || 'Não Informado'}</td>
-                      <td className="py-4 text-xs text-gray-500">{item.registered_by || 'Sistema'}</td>
-                      <td className="py-4">
+                      <td className="py-4 font-medium min-w-[150px]">{item.description}</td>
+                      <td className="py-4 text-gray-600 dark:text-gray-400 whitespace-nowrap">{item.payment_method || 'Não Informado'}</td>
+                      <td className="py-4 text-xs text-gray-500 whitespace-nowrap">{item.registered_by || 'Sistema'}</td>
+                      <td className="py-4 whitespace-nowrap">
                         <span className={`px-2 py-1 rounded text-xs font-semibold ${item.type === 'INCOME' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
                           {item.type === 'INCOME' ? 'Receita' : 'Despesa'}
                         </span>
                       </td>
-                      <td className={`py-4 font-bold ${item.type === 'INCOME' ? 'text-green-600' : 'text-red-600'}`}>
+                      <td className={`py-4 font-bold whitespace-nowrap text-right ${item.type === 'INCOME' ? 'text-green-600' : 'text-red-600'}`}>
                         {formatarMoeda(item.amount)}
                       </td>
-                      <td className="py-4 text-right">
-                        <div className="flex justify-end gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                      <td className="py-4">
+                        <div className="flex justify-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                           <button 
                             onClick={() => abrirModalEdicao(item)} 
                             className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded transition" 
@@ -265,16 +273,17 @@ export default function Dashboard() {
       {/* --- Transaction Modal (Create / Edit) --- */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative">
+          {/* max-h-[90vh] e overflow-y-auto impedem o formulário de vazar se a tela for pequena */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
             
             <button 
               onClick={() => setIsModalOpen(false)} 
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 dark:bg-gray-700 p-1 rounded-full"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
             
-            <h2 className="text-xl font-bold mb-6">
+            <h2 className="text-xl font-bold mb-6 pr-8">
               {transacaoEmEdicao 
                 ? '✏️ Editar Transação' 
                 : (tipoTransacao === 'INCOME' ? '🟢 Registrar Receita' : '🔴 Registrar Despesa')}
@@ -362,13 +371,13 @@ export default function Dashboard() {
                   required 
                   defaultValue={transacaoEmEdicao?.description} 
                   className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500" 
-                  placeholder="Ex: Material de escritório / Mensalidade" 
+                  placeholder="Ex: Material de escritório" 
                 />
               </div>
               
               <button 
                 type="submit" 
-                className={`w-full py-3 rounded-lg font-bold text-white transition-colors ${
+                className={`w-full py-3 rounded-lg font-bold text-white transition-colors mt-6 ${
                   transacaoEmEdicao 
                     ? 'bg-blue-600 hover:bg-blue-700' 
                     : (tipoTransacao === 'INCOME' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700')
@@ -384,15 +393,15 @@ export default function Dashboard() {
       {/* --- Export Modal --- */}
       {isExportModalOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
             <button 
               onClick={() => setIsExportModalOpen(false)} 
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 dark:bg-gray-700 p-1 rounded-full"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
             
-            <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
+            <h2 className="text-xl font-bold mb-2 flex items-center gap-2 pr-8">
               <Download size={24} className="text-blue-500" /> Exportar Relatório
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
@@ -410,7 +419,7 @@ export default function Dashboard() {
                     onChange={() => setExportType('MONTH')} 
                     className="w-4 h-4 text-blue-600" 
                   />
-                  <span className="font-medium">Exportar um mês específico</span>
+                  <span className="font-medium text-sm sm:text-base">Exportar um mês específico</span>
                 </label>
                 
                 {exportType === 'MONTH' && (
@@ -419,7 +428,7 @@ export default function Dashboard() {
                       type="month" 
                       value={exportPeriodo} 
                       onChange={(e) => setExportPeriodo(e.target.value)} 
-                      className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 text-sm rounded-lg outline-none px-3 py-2 cursor-pointer" 
+                      className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 text-sm rounded-lg outline-none px-3 py-2 cursor-pointer w-full" 
                     />
                   </div>
                 )}
@@ -433,13 +442,13 @@ export default function Dashboard() {
                     onChange={() => setExportType('ALL')} 
                     className="w-4 h-4 text-blue-600" 
                   />
-                  <span className="font-medium">Exportar todo o histórico</span>
+                  <span className="font-medium text-sm sm:text-base">Exportar todo o histórico</span>
                 </label>
               </div>
               
               <button 
                 type="submit" 
-                className="w-full py-3 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition"
+                className="w-full py-3 mt-4 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition"
               >
                 Baixar Planilha
               </button>
