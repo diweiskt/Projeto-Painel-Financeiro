@@ -297,7 +297,7 @@ export default function Dashboard() {
                   name="transaction_date" 
                   required 
                   defaultValue={transacaoEmEdicao ? transacaoEmEdicao.transaction_date.split('T')[0] : new Date().toISOString().split('T')[0]} 
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500" 
+                  className="w-full max-w-full min-w-0 appearance-none px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               
