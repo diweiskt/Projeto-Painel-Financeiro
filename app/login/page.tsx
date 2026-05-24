@@ -79,7 +79,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 outline-none transition dark:text-white"
-              placeholder="socio@pintura.com"
+              placeholder="login@dw.pro"
             />
           </div>
 
