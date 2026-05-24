@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../../lib/supabase'; // Voltando duas pastas para achar a lib
 import { useRouter } from 'next/navigation';
-import { Paintbrush, Eye } from 'lucide-react'; // Adicionado ícone Eye para o visitante
+import { Paintbrush, Eye, Info } from 'lucide-react'; // Adicionado ícone Info para o aviso
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -131,6 +131,22 @@ export default function Login() {
           <Eye size={20} />
           {visitorLoading ? 'Acessando...' : 'Entrar como Visitante'}
         </button>
+
+        {/* Caixa de Informação do Visitante */}
+        <div className="mt-4 flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-lg">
+          <Info className="text-blue-500 dark:text-blue-400 flex-shrink-0 mt-0.5" size={16} />
+          <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+            O modo visitante permite apenas a visualização. Para testar o sistema com permissões de edição,{' '}
+            <a 
+              href="mailto:oi@diwei.pro" 
+              className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              entre em contato comigo
+            </a>.
+          </p>
+        </div>
 
       </div>
     </div>
