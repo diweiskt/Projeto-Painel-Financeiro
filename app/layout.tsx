@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Diwei Project | Seu Painel Financeiro",
+  title: "Seu Painel Financeiro",
   description: "Controle financeiro inteligente e simplificado",
 };
 
