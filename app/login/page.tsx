@@ -42,7 +42,7 @@ export default function Login() {
     setError('');
 
     const { error } = await supabase.auth.signInWithPassword({
-      email: 'visitante@diwei.pro',
+      email: 'visitante@dw.pro',
       password: 'visitante123',
     });
 
