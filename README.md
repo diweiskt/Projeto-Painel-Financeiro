@@ -50,7 +50,7 @@ O projeto foi construído utilizando as seguintes ferramentas:
 
 ## 🚀 Links Úteis & Demonstração
 
-* **Acesse o Painel Homologado:** [https://diwei.pro](https://diwei.pro)
+* **Acesse o Painel Homologado:** [projeto-painel-financeiro.vercel.app/](https://projeto-painel-financeiro.vercel.app/)
 * **Ambiente de Banco de Dados:** Gerenciado via Supabase Cloud.
 
 ---
