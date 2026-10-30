@@ -1,0 +1,376 @@
+/* Estilos extraídos dos componentes. CSS convencional, sem diretivas @apply ou @variant. */
+
+/* As cores usam as variáveis do Tailwind já carregadas em globals.css. */
+
+.login-001 {
+  min-height:100vh;
+  background-color:var(--color-gray-50);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:1rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-001 {
+    background-color:var(--color-gray-900);
+  }
+}
+
+.login-002 {
+  max-width:28rem;
+  width:100%;
+  background-color:#fff;
+  border-radius:1rem;
+  box-shadow:0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1);
+  padding:2rem;
+  border-width:1px;
+  border-style:solid;
+  border-color:var(--color-gray-100);
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-002 {
+    background-color:var(--color-gray-800);
+    border-color:var(--color-gray-700);
+  }
+}
+
+.login-003 {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:2rem;
+}
+
+.login-004 {
+  background-color:var(--color-blue-100);
+  padding:.75rem;
+  border-radius:9999px;
+  margin-bottom:1rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-004 {
+    background-color:color-mix(in oklab, var(--color-blue-900) 30%, transparent);
+  }
+}
+
+.login-005 {
+  color:var(--color-blue-600);
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-005 {
+    color:var(--color-blue-400);
+  }
+}
+
+.login-006 {
+  font-size:1.5rem;
+  line-height:calc(2 / 1.5);
+  font-weight:700;
+  color:var(--color-gray-900);
+  letter-spacing:-.025em;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-006 {
+    color:#fff;
+  }
+}
+
+.login-007 {
+  font-size:.875rem;
+  line-height:calc(1.25 / .875);
+  color:var(--color-gray-500);
+  margin-top:.25rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-007 {
+    color:var(--color-gray-400);
+  }
+}
+
+.login-009 {
+  display:block;
+  font-size:.875rem;
+  line-height:calc(1.25 / .875);
+  font-weight:500;
+  color:var(--color-gray-700);
+  margin-bottom:.25rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-009 {
+    color:var(--color-gray-300);
+  }
+}
+
+.login-010 {
+  width:100%;
+  padding-inline:1rem;
+  padding-block:.75rem;
+  border-width:1px;
+  border-style:solid;
+  border-color:var(--color-gray-300);
+  border-radius:.75rem;
+  background-color:var(--color-gray-50);
+  outline-style:none;
+  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-timing-function:cubic-bezier(.4,0,.2,1);
+  transition-duration:150ms;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-010 {
+    border-color:var(--color-gray-600);
+    background-color:var(--color-gray-900);
+    color:#fff;
+  }
+}
+
+.login-010:focus {
+  box-shadow:0 0 0 2px var(--ring-color, currentColor);
+  --ring-color:var(--color-blue-500);
+}
+
+.login-011 {
+  background-color:var(--color-red-50);
+  color:var(--color-red-600);
+  font-size:.875rem;
+  line-height:calc(1.25 / .875);
+  padding:.75rem;
+  border-radius:.5rem;
+  text-align:center;
+  font-weight:500;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-011 {
+    background-color:color-mix(in oklab, var(--color-red-900) 30%, transparent);
+    color:var(--color-red-400);
+  }
+}
+
+.login-012 {
+  width:100%;
+  padding-block:.75rem;
+  border-radius:.75rem;
+  font-weight:700;
+  color:#fff;
+  background-color:var(--color-blue-600);
+  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-timing-function:cubic-bezier(.4,0,.2,1);
+  transition-duration:150ms;
+  margin-top:.5rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-012:hover {
+  background-color:var(--color-blue-700);
+}
+
+.login-012:disabled {
+  opacity:.7;
+}
+
+.login-013 {
+  margin-top:1.5rem;
+  margin-bottom:1.5rem;
+  display:flex;
+  align-items:center;
+}
+
+.login-014 {
+  flex-grow:1;
+  border-top-width:1px;
+  border-top-style:solid;
+  border-color:var(--color-gray-200);
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-014 {
+    border-color:var(--color-gray-700);
+  }
+}
+
+.login-015 {
+  flex-shrink:0;
+  margin-inline:1rem;
+  font-size:.875rem;
+  line-height:calc(1.25 / .875);
+  color:var(--color-gray-400);
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-015 {
+    color:var(--color-gray-500);
+  }
+}
+
+.login-016 {
+  width:100%;
+  padding-block:.75rem;
+  border-radius:.75rem;
+  font-weight:500;
+  color:var(--color-gray-700);
+  background-color:#fff;
+  border-width:2px;
+  border-style:solid;
+  border-color:var(--color-gray-200);
+  transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-timing-function:cubic-bezier(.4,0,.2,1);
+  transition-duration:150ms;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.5rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-016 {
+    color:var(--color-gray-200);
+    background-color:var(--color-gray-800);
+    border-color:var(--color-gray-600);
+  }
+}
+
+.login-016:hover {
+  border-color:var(--color-blue-500);
+  color:var(--color-blue-600);
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-016:hover {
+    border-color:var(--color-blue-400);
+    color:var(--color-blue-400);
+  }
+}
+
+.login-016:disabled {
+  opacity:.7;
+}
+
+.login-017 {
+  margin-top:1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:.5rem;
+  padding:1rem;
+  background-color:var(--color-blue-50);
+  border-width:1px;
+  border-style:solid;
+  border-color:var(--color-blue-100);
+  border-radius:.5rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-017 {
+    background-color:color-mix(in oklab, var(--color-blue-900) 20%, transparent);
+    border-color:color-mix(in oklab, var(--color-blue-800) 30%, transparent);
+  }
+}
+
+.login-018 {
+  color:var(--color-blue-500);
+  flex-shrink:0;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-018 {
+    color:var(--color-blue-400);
+  }
+}
+
+.login-019 {
+  font-size:.75rem;
+  line-height:calc(1 / .75);
+  color:var(--color-gray-600);
+  line-height:1.625;
+  max-width:320px;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-019 {
+    color:var(--color-gray-300);
+  }
+}
+
+.login-020 {
+  margin-top:.25rem;
+  font-size:.75rem;
+  line-height:calc(1 / .75);
+  color:var(--color-blue-600);
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:.25rem;
+}
+
+@media (prefers-color-scheme:dark) {
+  .login-020 {
+    color:var(--color-blue-400);
+  }
+}
+
+.login-020:hover {
+  text-decoration-line:underline;
+}
+
+/* TECH EDITION — tela de autenticação, somente apresentação */
+.login-001 { color-scheme: dark; background: radial-gradient(ellipse 65% 55% at 50% 10%, rgba(51,111,171,.2),transparent 75%),radial-gradient(ellipse 35% 40% at 95% 90%,rgba(104,65,196,.16),transparent 90%), #070c17; position: relative; isolation: isolate; color:#eaf4ff; font-family: Inter,'Segoe UI',Arial,sans-serif; }
+.login-001::before { content: ''; position:fixed; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(#6385b20a 1px,transparent 1px),linear-gradient(90deg,#6385b20a 1px,transparent 1px); background-size: 42px 42px; }
+.login-002 { background:linear-gradient(155deg,#172940,#0e1929); color:#eaf4ff; border:1px solid #36516f; box-shadow:0 30px 90px #0007,0 0 60px #239fd015; border-radius:22px; }
+.login-004 { background:rgba(52,206,225,.12); border:1px solid #42e4ed55; box-shadow:0 0 28px #42e4ed19; }
+.login-005 { color:#62e0ed; }
+.login-006 { color:#f2f8ff; letter-spacing:-.045em; }
+.login-007 { color:#9fb3cc; }
+.login-009 { color:#bdcfe5; }
+.login-010 { background:#0b1728; color:#eff8ff; border:1px solid #37516d; border-radius:11px; }
+.login-010:focus { border-color:#55dbe7; box-shadow:0 0 0 3px #40d5e626; }
+.login-010::placeholder { color:#849bb8; }
+.login-011 { background:#54233a66; color:#ff9cae; border:1px solid #a94e6766; }
+.login-012 { background:linear-gradient(110deg,#0e9cac,#496bd9); color:white; border:1px solid #55dce466; box-shadow:0 12px 28px #16aac32b; border-radius:11px; }
+.login-012:hover { background:linear-gradient(110deg,#1dbbc7,#5c7ded); }
+.login-014 { border-color:#344d69; }
+.login-015 { color:#8da5bf; }
+.login-016 { background:#192a40; color:#cfe1f4; border-color:#37516e; border-radius:11px; }
+.login-016:hover { color:#6ce4ed; border-color:#58cbd8; }
+.login-017 { background:rgba(36,105,140,.14); border-color:#36658080; border-radius:12px; }
+.login-018, .login-020 { color:#62dce8; }
+.login-019 { color:#b5c8dc; }
+
+/* Identidade CW Studio — substitui apenas o ícone de pincel no login. */
+.login-004 {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (prefers-color-scheme: dark) {
+  .login-004 { background: transparent; }
+}
+.login-cw-mark {
+  display: inline-block;
+  color: #008cffd9;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2.75rem, 7vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.085em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.login-cw-dot {
+  color: #00ffe1b2;
+}

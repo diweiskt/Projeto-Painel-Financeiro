@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
+import './dashboard.css';
 import { 
   PlusCircle, MinusCircle, DollarSign, Wallet, Calendar, X, 
-  Filter, User, LogOut, Download, Edit, Trash2 
+  Filter, User, LogOut, Download, Edit, Trash2, LayoutDashboard, Activity, ArrowUpRight, ArrowDownRight, TrendingUp, ShieldCheck, CircleHelp 
 } from 'lucide-react';
 import { 
   PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, 
-  Tooltip, ResponsiveContainer, Legend 
+  Tooltip, ResponsiveContainer, Legend, CartesianGrid 
 } from 'recharts';
 
 import { useTransactions } from '../hooks/useTransactions';
@@ -54,27 +55,43 @@ export default function Dashboard() {
     value: dadosRoscaMap[key] 
   }));
   
-  const CORES_PIZZA = ['#ef4444', '#f97316', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+  const CORES_PIZZA = ['#5ce1e6', '#8276fa', '#ffba70', '#45cda5', '#f67ca5', '#7daddf'];
   const dadosBarras = [{ name: 'Resumo do Período', Entradas: entradas, Saídas: saidas }];
 
+  const percentualSaidas = entradas > 0 ? Math.min((saidas / entradas) * 100, 100) : 0;
+  const nomePeriodo = periodoFiltro ? new Date(`${periodoFiltro}-01T12:00:00`).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }) : 'Visão geral';
+
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-4 md:p-8">
+    <div className="dash-001 dashboard-shell">
+      <aside className="app-sidebar" aria-label="Menu do painel">
+        <div className="sidebar-brand"><div className="brand-symbol"><Activity size={22} strokeWidth={2.5}/></div><div><strong>CW<span>Studio</span></strong><small>FINANCE SYSTEM</small></div></div>
+        <div className="sidebar-category">WORKSPACE</div>
+        <div className="side-nav-active"><LayoutDashboard size={18}/><span>Visão geral</span><span className="active-indicator"/></div>
+        <div className="sidebar-category sidebar-category-second">SEU PAINEL</div>
+        <div className="side-nav-static"><Activity size={18}/><span>Dados financeiros</span></div>
+        <div className="side-nav-static"><ShieldCheck size={18}/><span>Ambiente seguro</span></div>
+        <div className="sidebar-spacer"/>
+        <div className="sidebar-assistance"><CircleHelp size={19}/><div><strong>Controle financeiro</strong><span>Seu negócio, em tempo real.</span></div></div>
+        <div className="sidebar-profile"><div className="profile-avatar"><User size={18}/></div><div className="sidebar-profile-text"><strong>{socioLogado?.nome || 'Usuário'}</strong><span>{socioLogado?.email || 'Conta conectada'}</span></div><button type="button" title="Sair da conta" aria-label="Sair da conta" onClick={fazerLogout}><LogOut size={17}/></button></div>
+      </aside>
+      <div className="dashboard-content">
       
+      <div className="dashboard-topbar"><div className="topbar-location"><span className="topbar-dot"/> PAINEL / <strong>VISÃO GERAL</strong></div><div className="topbar-status"><span/> Sistema operacional</div></div>
       {/* --- Header & Controls --- */}
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 max-w-6xl mx-auto">
-        <div className="w-full md:w-auto flex justify-between items-center">
+      <header className="dash-002">
+        <div className="dash-003">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Sua Empresa Aqui</h1>
-            <div className="flex items-center gap-4 mt-0.5">
-              <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+            <div className="header-kicker">FINANCIAL OVERVIEW <span> / 01</span></div><h1 className="dash-004">Visão geral <span>financeira.</span></h1><p className="header-subheading">Acompanhe os números do seu negócio em um só lugar.</p>
+            <div className="dash-005">
+              <p className="dash-006">
                 <User size={14} /> Bem-vindo, 
-                <span className="font-bold text-blue-600 dark:text-blue-400 truncate max-w-[120px] sm:max-w-none">
+                <span className="dash-007">
                   {socioLogado?.nome || socioLogado?.email}
                 </span>
               </p>
               <button 
                 onClick={fazerLogout} 
-                className="text-xs flex items-center gap-1 text-gray-400 hover:text-red-500 transition"
+                className="dash-008"
               >
                 <LogOut size={12} /> Sair
               </button>
@@ -82,37 +99,37 @@ export default function Dashboard() {
           </div>
         </div>
         
-        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full md:w-auto">
-          <div className="flex gap-2 w-full sm:w-auto">
+        <div className="dash-009">
+          <div className="dash-010">
             <button 
               onClick={() => setIsExportModalOpen(true)} 
-              className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-2 rounded-lg font-medium transition dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 text-sm border border-gray-300 dark:border-gray-600"
+              className="dash-011"
             >
-              <Download size={16} /> <span className="hidden sm:inline">Exportar</span>
+              <Download size={16} /> <span className="dash-012">Exportar</span>
             </button>
             
-            <div className="flex-1 sm:flex-none flex justify-center items-center gap-2 bg-white dark:bg-gray-800 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-              <Filter size={16} className="text-gray-400" />
+            <div className="dash-013">
+              <Filter size={16} className="dash-014" />
               <input 
                 type="month" 
                 value={periodoFiltro} 
                 onChange={(e) => setPeriodoFiltro(e.target.value)} 
-                className="bg-transparent dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-medium outline-none cursor-pointer w-full"
+                className="dash-015"
               />
             </div>
           </div>
 
-          <div className="flex gap-2 w-full sm:w-auto">
+          <div className="dash-010">
             <button 
               onClick={() => abrirModalNovo('EXPENSE')} 
-              className="flex-1 justify-center flex items-center gap-2 bg-red-100 text-red-700 hover:bg-red-200 px-4 py-2 rounded-lg font-medium transition dark:bg-red-900/30 dark:text-red-400 text-sm whitespace-nowrap"
+              className="dash-016"
             >
               <MinusCircle size={18} /> <span>Despesa</span>
             </button>
             
             <button 
               onClick={() => abrirModalNovo('INCOME')} 
-              className="flex-1 justify-center flex items-center gap-2 bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition text-sm whitespace-nowrap"
+              className="dash-017"
             >
               <PlusCircle size={18} /> <span>Receita</span>
             </button>
@@ -120,141 +137,146 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto space-y-8">
+      <main className="dash-018">
+        <div className="overview-strip"><div><span className="live-bullet"/> RESUMO FINANCEIRO <span className="strip-separator">/</span> {nomePeriodo}</div><div>{transacoes.length} transações registradas <ArrowUpRight size={14}/></div></div>
         
         {/* --- Summary Cards --- */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Saldo no Período</h2>
-              <Wallet className="text-blue-500" size={20} />
+        <section className="dash-019">
+          <div className="dash-020 summary-balance">
+            <div className="dash-021">
+              <h2 className="dash-022">SALDO DISPONÍVEL <span className="card-index">01 / BALANCE</span></h2>
+              <Wallet className="dash-023" size={20} />
             </div>
-            <p className={`text-3xl font-bold truncate ${saldo >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600'}`}>
+            <p className={`dash-077 ${saldo >= 0 ? 'dash-084' : 'dash-088'}`}>
               {formatarMoeda(saldo)}
             </p>
+            <div className="card-bottom-note"><span className="mini-live"/> Resultado líquido do período <TrendingUp size={16}/></div>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Entradas</h2>
-              <DollarSign className="text-green-500" size={20} />
+          <div className="dash-020 summary-income">
+            <div className="dash-021">
+              <h2 className="dash-022">TOTAL DE ENTRADAS</h2>
+              <DollarSign className="dash-024" size={20} />
             </div>
-            <p className="text-2xl font-bold text-green-600 dark:text-green-400 truncate">
+            <p className="dash-025">
               {formatarMoeda(entradas)}
             </p>
+            <div className="card-bottom-note"><ArrowUpRight size={15}/> Receitas registradas no período</div>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 sm:col-span-2 md:col-span-1">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">Saídas</h2>
-              <DollarSign className="text-red-500" size={20} />
+          <div className="dash-026 summary-expense">
+            <div className="dash-021">
+              <h2 className="dash-022">TOTAL DE SAÍDAS</h2>
+              <DollarSign className="dash-027" size={20} />
             </div>
-            <p className="text-2xl font-bold text-red-600 dark:text-red-400 truncate">
+            <p className="dash-028">
               {formatarMoeda(saidas)}
             </p>
+            <div className="expense-meter"><span style={{ width: `${percentualSaidas}%` }}/></div><div className="card-bottom-note"><ArrowDownRight size={15}/> Despesas em relação às entradas</div>
           </div>
         </section>
 
         {/* --- Charts --- */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col overflow-hidden">
-            <h3 className="font-semibold mb-4 text-lg">Distribuição por Categoria</h3>
-            <div className="flex-1 w-full min-h-[250px]">
+        <section className="dash-029">
+          <div className="dash-030">
+            <div className="chart-header"><div><span className="section-overline">ANÁLISE DE GASTOS</span><h3 className="dash-031">Despesas por categoria</h3><p>Distribuição dos seus gastos no período</p></div><span className="chart-tag">CATEGORIAS</span></div>
+            <div className="dash-032">
               {dadosRosca.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
-                    <Pie data={dadosRosca} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
+                    <Pie data={dadosRosca} cx="50%" cy="50%" innerRadius="62%" outerRadius="83%" paddingAngle={4} cornerRadius={6} dataKey="value" stroke="none">
                       {dadosRosca.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={CORES_PIZZA[index % CORES_PIZZA.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: any) => formatarMoeda(Number(value))} />
-                    <Legend wrapperStyle={{ fontSize: '12px', marginTop: '10px' }} />
+                    <Tooltip contentStyle={{ background: '#111d31', border: '1px solid #33425c', borderRadius: 12, color: '#eaf2ff' }} formatter={(value: any) => formatarMoeda(Number(value))} />
                   </PieChart>
                 </ResponsiveContainer>
               ) : ( 
-                <div className="flex h-full items-center justify-center text-sm text-gray-400 text-center">
+                <div className="dash-033">
                   Nenhuma despesa neste período.
                 </div> 
               )}
             </div>
+            {dadosRosca.length > 0 && <div className="category-legend">{dadosRosca.map((item, index) => <div key={item.name} className="category-legend-item"><span className="legend-swatch" style={{backgroundColor: CORES_PIZZA[index % CORES_PIZZA.length]}}/><span className="legend-name">{item.name}</span><strong>{formatarMoeda(item.value)}</strong></div>)}</div>}
           </div>
           
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 min-h-[350px] flex flex-col overflow-hidden">
-            <h3 className="font-semibold mb-4 text-lg">Entradas vs Saídas</h3>
-            <div className="flex-1 w-full min-h-[250px]">
+          <div className="dash-030">
+            <div className="chart-header"><div><span className="section-overline">FLUXO DE CAIXA</span><h3 className="dash-031">Entradas & saídas</h3><p>Comparativo financeiro do período</p></div><span className="chart-tag">COMPARATIVO</span></div>
+            <div className="dash-032">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={dadosBarras}>
-                  <XAxis dataKey="name" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `R$ ${value}`} width={80} />
-                  <Tooltip cursor={{fill: 'transparent'}} formatter={(value: any) => formatarMoeda(Number(value))} />
-                  <Bar dataKey="Entradas" fill="#10b981" radius={[4, 4, 0, 0]} barSize={40} />
-                  <Bar dataKey="Saídas" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={40} />
+                <BarChart data={dadosBarras} margin={{ top: 15, right: 15, left: 0, bottom: 5 }} barGap={16}>
+                  <defs><linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5ce1d7"/><stop offset="100%" stopColor="#259f9e"/></linearGradient><linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#9384ff"/><stop offset="100%" stopColor="#5543a0"/></linearGradient></defs>
+                  <CartesianGrid stroke="#26334a" strokeDasharray="4 6" vertical={false}/>
+                  <XAxis dataKey="name" stroke="#71819d" fontSize={11} tickLine={false} axisLine={false} tickMargin={14} />
+                  <YAxis stroke="#71819d" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(value) => `R$ ${Number(value).toLocaleString('pt-BR')}`} width={85} />
+                  <Tooltip cursor={{fill: '#ffffff06'}} contentStyle={{background: '#111d31', border: '1px solid #33425c', borderRadius: 12, color: '#eaf2ff'}} formatter={(value: any) => formatarMoeda(Number(value))} />
+                  <Bar dataKey="Entradas" fill="url(#incomeGradient)" radius={[9, 9, 3, 3]} maxBarSize={64} />
+                  <Bar dataKey="Saídas" fill="url(#expenseGradient)" radius={[9, 9, 3, 3]} maxBarSize={64} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
+            <div className="bar-custom-legend"><span><i className="bar-color-income"/> Entradas</span><span><i className="bar-color-expense"/> Saídas</span></div>
           </div>
         </section>
 
         {/* --- Transaction History Table --- */}
-        <section className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <h3 className="font-semibold text-lg flex items-center gap-2 mb-6">
-            <Calendar size={20} className="text-amber-500"/> Histórico de Transações
-          </h3>
+        <section className="dash-034">
+          <div className="transactions-heading"><div><span className="section-overline">REGISTROS RECENTES</span><h3 className="dash-035"><Calendar size={20} className="dash-036"/> Histórico de transações</h3><p>Movimentações financeiras do período selecionado.</p></div><span className="transaction-count">{transacoes.length} registros</span></div>
           
           {/* Container com scroll horizontal em telas pequenas */}
-          <div className="overflow-x-auto pb-4">
+          <div className="dash-037">
             {/* Tabela com largura mínima garantida (min-w-[800px]) para as colunas não esmagarem */}
-            <table className="w-full min-w-[800px] text-left border-collapse">
+            <table className="dash-038">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400">
-                  <th className="pb-3 font-medium whitespace-nowrap">Data</th>
-                  <th className="pb-3 font-medium whitespace-nowrap">Categoria</th>
-                  <th className="pb-3 font-medium">Descrição</th>
-                  <th className="pb-3 font-medium whitespace-nowrap">Forma</th>
-                  <th className="pb-3 font-medium whitespace-nowrap">Registrado por</th>
-                  <th className="pb-3 font-medium whitespace-nowrap">Tipo</th>
-                  <th className="pb-3 font-medium whitespace-nowrap text-right">Valor</th>
-                  <th className="pb-3 font-medium whitespace-nowrap text-center">Ações</th>
+                <tr className="dash-039">
+                  <th className="dash-040">Data</th>
+                  <th className="dash-040">Categoria</th>
+                  <th className="dash-041">Descrição</th>
+                  <th className="dash-040">Forma</th>
+                  <th className="dash-040">Registrado por</th>
+                  <th className="dash-040">Tipo</th>
+                  <th className="dash-042">Valor</th>
+                  <th className="dash-043">Ações</th>
                 </tr>
               </thead>
-              <tbody className="text-sm">
+              <tbody className="dash-044">
                 {transacoes.length === 0 ? ( 
                   <tr>
-                    <td colSpan={8} className="py-8 text-center text-gray-400">Nenhuma transação neste período.</td>
+                    <td colSpan={8} className="dash-045">Nenhuma transação neste período.</td>
                   </tr> 
                 ) : (
                   transacoes.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-100 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition group">
-                      <td className="py-4 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                    <tr key={item.id} className="group dash-046">
+                      <td className="dash-047">
                         {formatarDataBr(item.transaction_date)}
                       </td>
-                      <td className="py-4 font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                        <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-xs">{item.category || 'Outros'}</span>
+                      <td className="dash-048">
+                        <span className="dash-049">{item.category || 'Outros'}</span>
                       </td>
-                      <td className="py-4 font-medium min-w-[150px]">{item.description}</td>
-                      <td className="py-4 text-gray-600 dark:text-gray-400 whitespace-nowrap">{item.payment_method || 'Não Informado'}</td>
-                      <td className="py-4 text-xs text-gray-500 whitespace-nowrap">{item.registered_by || 'Sistema'}</td>
-                      <td className="py-4 whitespace-nowrap">
-                        <span className={`px-2 py-1 rounded text-xs font-semibold ${item.type === 'INCOME' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}`}>
+                      <td className="dash-050">{item.description}</td>
+                      <td className="dash-051">{item.payment_method || 'Não Informado'}</td>
+                      <td className="dash-052">{item.registered_by || 'Sistema'}</td>
+                      <td className="dash-053">
+                        <span className={`dash-078 ${item.type === 'INCOME' ? 'dash-081' : 'dash-082'}`}>
                           {item.type === 'INCOME' ? 'Receita' : 'Despesa'}
                         </span>
                       </td>
-                      <td className={`py-4 font-bold whitespace-nowrap text-right ${item.type === 'INCOME' ? 'text-green-600' : 'text-red-600'}`}>
+                      <td className={`dash-079 ${item.type === 'INCOME' ? 'dash-087' : 'dash-088'}`}>
                         {formatarMoeda(item.amount)}
                       </td>
-                      <td className="py-4">
-                        <div className="flex justify-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                      <td className="dash-054">
+                        <div className="dash-055">
                           <button 
                             onClick={() => abrirModalEdicao(item)} 
-                            className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded transition" 
+                            className="dash-056" 
                             title="Editar"
                           >
                             <Edit size={16} />
                           </button>
                           <button 
                             onClick={() => deletarTransacao(item.id)} 
-                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded transition" 
+                            className="dash-057" 
                             title="Excluir"
                           >
                             <Trash2 size={16} />
@@ -269,58 +291,60 @@ export default function Dashboard() {
           </div>
         </section>
       </main>
+      <footer className="dashboard-footer"><span>CW Studio<b>•</b> FINANCIAL INTELLIGENCE</span><span>Visão consolidada de suas finanças.</span></footer>
+      </div>
 
       {/* --- Transaction Modal (Create / Edit) --- */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="dash-058">
           {/* max-h-[90vh] e overflow-y-auto impedem o formulário de vazar se a tela for pequena */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+          <div className="dash-059">
             
             <button 
               onClick={() => setIsModalOpen(false)} 
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 dark:bg-gray-700 p-1 rounded-full"
+              className="dash-060"
             >
               <X size={20} />
             </button>
             
-            <h2 className="text-xl font-bold mb-6 pr-8">
+            <h2 className="dash-061">
               {transacaoEmEdicao 
                 ? '✏️ Editar Transação' 
                 : (tipoTransacao === 'INCOME' ? '🟢 Registrar Receita' : '🔴 Registrar Despesa')}
             </h2>
             
-            <form onSubmit={salvarTransacao} className="space-y-4">
+            <form onSubmit={salvarTransacao} className="dash-062">
               <div>
-                <label className="block text-sm font-medium mb-1">Data</label>
+                <label className="dash-063">Data</label>
                 <input 
                   type="date" 
                   name="transaction_date" 
                   required 
                   defaultValue={transacaoEmEdicao ? transacaoEmEdicao.transaction_date.split('T')[0] : new Date().toISOString().split('T')[0]} 
-                  className="w-full max-w-full min-w-0 appearance-none px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500"
+                  className="dash-064"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Valor (R$)</label>
+                <label className="dash-063">Valor (R$)</label>
                 <input 
                   type="number" 
                   name="amount" 
                   step="0.01" 
                   required 
                   defaultValue={transacaoEmEdicao?.amount} 
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500" 
+                  className="dash-065" 
                   placeholder="0.00" 
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Categoria</label>
+                <label className="dash-063">Categoria</label>
                 <select 
                   name="category" 
                   required 
                   defaultValue={transacaoEmEdicao?.category || (tipoTransacao === 'EXPENSE' ? 'Operacional' : 'Vendas')} 
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                  className="dash-066"
                 >
                   {tipoTransacao === 'EXPENSE' ? ( 
                     <>
@@ -345,12 +369,12 @@ export default function Dashboard() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Forma de Pagamento</label>
+                <label className="dash-063">Forma de Pagamento</label>
                 <select 
                   name="payment_method" 
                   required 
                   defaultValue={transacaoEmEdicao?.payment_method || 'Pix'} 
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                  className="dash-066"
                 >
                   <option value="Pix">📸 Pix</option>
                   <option value="Dinheiro">💵 Dinheiro</option>
@@ -364,23 +388,23 @@ export default function Dashboard() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Descrição Breve</label>
+                <label className="dash-063">Descrição Breve</label>
                 <input 
                   type="text" 
                   name="description" 
                   required 
                   defaultValue={transacaoEmEdicao?.description} 
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-900 outline-none focus:ring-2 focus:ring-blue-500" 
+                  className="dash-065" 
                   placeholder="Ex: Material de escritório" 
                 />
               </div>
               
               <button 
                 type="submit" 
-                className={`w-full py-3 rounded-lg font-bold text-white transition-colors mt-6 ${
+                className={`dash-080 ${
                   transacaoEmEdicao 
-                    ? 'bg-blue-600 hover:bg-blue-700' 
-                    : (tipoTransacao === 'INCOME' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700')
+                    ? 'dash-085' 
+                    : (tipoTransacao === 'INCOME' ? 'dash-083' : 'dash-086')
                 }`}
               >
                 {transacaoEmEdicao ? 'Salvar Alterações' : 'Salvar Transação'}
@@ -392,63 +416,63 @@ export default function Dashboard() {
 
       {/* --- Export Modal --- */}
       {isExportModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+        <div className="dash-058">
+          <div className="dash-059">
             <button 
               onClick={() => setIsExportModalOpen(false)} 
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 dark:bg-gray-700 p-1 rounded-full"
+              className="dash-060"
             >
               <X size={20} />
             </button>
             
-            <h2 className="text-xl font-bold mb-2 flex items-center gap-2 pr-8">
-              <Download size={24} className="text-blue-500" /> Exportar Relatório
+            <h2 className="dash-067">
+              <Download size={24} className="dash-023" /> Exportar Relatório
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+            <p className="dash-068">
               Gere um arquivo CSV para abrir no Excel.
             </p>
             
-            <form onSubmit={exportarParaExcel} className="space-y-5">
-              <div className="space-y-3">
-                <label className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900 transition dark:border-gray-700">
+            <form onSubmit={exportarParaExcel} className="dash-069">
+              <div className="dash-070">
+                <label className="dash-071">
                   <input 
                     type="radio" 
                     name="exportOption" 
                     value="MONTH" 
                     checked={exportType === 'MONTH'} 
                     onChange={() => setExportType('MONTH')} 
-                    className="w-4 h-4 text-blue-600" 
+                    className="dash-072" 
                   />
-                  <span className="font-medium text-sm sm:text-base">Exportar um mês específico</span>
+                  <span className="dash-073">Exportar um mês específico</span>
                 </label>
                 
                 {exportType === 'MONTH' && (
-                  <div className="flex gap-2 pl-8">
+                  <div className="dash-074">
                     <input 
                       type="month" 
                       value={exportPeriodo} 
                       onChange={(e) => setExportPeriodo(e.target.value)} 
-                      className="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 text-sm rounded-lg outline-none px-3 py-2 cursor-pointer w-full" 
+                      className="dash-075" 
                     />
                   </div>
                 )}
                 
-                <label className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900 transition dark:border-gray-700">
+                <label className="dash-071">
                   <input 
                     type="radio" 
                     name="exportOption" 
                     value="ALL" 
                     checked={exportType === 'ALL'} 
                     onChange={() => setExportType('ALL')} 
-                    className="w-4 h-4 text-blue-600" 
+                    className="dash-072" 
                   />
-                  <span className="font-medium text-sm sm:text-base">Exportar todo o histórico</span>
+                  <span className="dash-073">Exportar todo o histórico</span>
                 </label>
               </div>
               
               <button 
                 type="submit" 
-                className="w-full py-3 mt-4 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition"
+                className="dash-076"
               >
                 Baixar Planilha
               </button>
