@@ -80,7 +80,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="login-010"
-              placeholder="login@dw.pro"
+              placeholder="login@cw.pro"
             />
           </div>
 
